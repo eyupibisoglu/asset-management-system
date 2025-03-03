@@ -25,7 +25,6 @@ export class AssetsController {
 
     @ApiOperation({ summary: 'Get assets' })
     @ApiResponse({ type: [CreatedAssetDto], status: 200 })
-    @ApiParam({ name: "id", allowEmptyValue: false, example: "67812973f949635c9bb9824d" })
     @ApiBearerAuth()
     @Get()
     findAll() {
