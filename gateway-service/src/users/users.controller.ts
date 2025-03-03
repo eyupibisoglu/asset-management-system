@@ -9,6 +9,7 @@ import { Public } from 'src/common/decorators/public.decorator';
 export class UsersController {
     constructor(@Inject('USERS_SERVICE') private client: ClientProxy) {}
         
+    @Public()
     @ApiOperation({ summary: 'Get a users' })
     @ApiResponse({ type: [CreatedUserDto], status: 200 })
     @ApiBearerAuth()

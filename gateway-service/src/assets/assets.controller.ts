@@ -5,6 +5,7 @@ import { AssetsService } from './assets.service';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { CreatedAssetDto } from './dto/created-asset.dto';
 import { CreateAssetDto } from './dto/create-asset.dto';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('assets')
 export class AssetsController {
