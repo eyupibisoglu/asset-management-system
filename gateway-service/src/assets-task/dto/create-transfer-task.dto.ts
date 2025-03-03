@@ -12,10 +12,10 @@ export class CreateTransferTaskDto {
     @ApiProperty({ 
         type: Number, 
         description: 'We can schedule task in order to delay transfer task. The delay is in milliseconds.', 
-        example: '5000' 
+        example: '2025-03-02T22:13:00.073-04:00' 
       })
     @IsNotEmpty()
-    delay: number;
+    scheduledIsoTime: number;
 
     @ApiProperty({ 
         type: Number, 

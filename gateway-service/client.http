@@ -51,12 +51,12 @@ POST http://localhost:3000/users
 Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
-{"email": "ozkanbor@gmail.com", "name": "Özkan Bor", "password": "123456"}
+{"email": "ibisoglueyup@gmail.com", "name": "Eyüp İbişoğlu", "password": "123456"}
 
 ###
 POST http://localhost:3000/assets-task
 Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
-{"from": "67c39735b3708c5b7c38e88c", "to": "67c399ecb3708c5b7c38e88e", "amount": 60, "scheduledUnixTime": 1740956345, "scheduledIsoTime": "2025-03-02T22:13:00.073-04:00" }
+{"from": "67c39735b3708c5b7c38e88c", "to": "67c399ecb3708c5b7c38e88e", "amount": 60, "scheduledIsoTime": "2025-03-02T22:13:00.073-04:00" }
 
