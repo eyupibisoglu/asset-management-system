@@ -1,0 +1,107 @@
+services:
+  gateway:
+    build: 
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth
+      - users
+      - assets
+      - wallets
+      - asset-tasks
+    environment:
+      - JWT_SECRET=ef5O£4te2i_a
+    networks:
+      - my_network
+
+  auth:
+    build: 
+      context: ./auth-service
+      dockerfile: Dockerfile
+    container_name: auth-service
+    ports:
+      - "3005:3005"
+    depends_on:
+      - users
+    environment:
+      - JWT_SECRET=ef5O£4te2i_a
+    networks:
+      - my_network
+
+  users:
+    build: 
+      context: ./users-service
+      dockerfile: Dockerfile
+    container_name: users-service
+    ports:
+      - "3006:3006"
+    environment:
+      - POSTGRES_USERNAME=neondb_owner
+      - POSTGRES_PASSWORD=npg_JdtEh67KoqPu
+      - POSTGRES_DB=paribu_asset_management
+      - POSTGRES_HOST=ep-purple-band-a51w40m4-pooler.us-east-2.aws.neon.tech
+      - POSTGRES_PORT=5432
+    networks:
+      - my_network
+
+  assets:
+    build: 
+      context: ./assets-service
+      dockerfile: Dockerfile
+    container_name: assets-service
+    ports:
+      - "3001:3001"
+    environment:
+      - DATABASE_USER=one-docs-eyup
+      - DATABASE_PASSWORD=RYczWW2WIVpwvZRQ
+      - CLUSTER_INFO=nest-blog.qe8gs.mongodb.net
+      - DATABASE_NAME=paribu_asset_management
+    networks:
+      - my_network
+
+  asset-tasks:
+    build: 
+      context: ./assets-task-service
+      dockerfile: Dockerfile
+    container_name: asset-tasks-service
+    ports:
+      - "3007:3007"
+    depends_on:
+      - assets
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    networks:
+      - my_network
+
+  wallets:
+    build: 
+      context: ./wallets-service
+      dockerfile: Dockerfile
+    container_name: wallets-service
+    ports:
+      - "3002:3002"
+    environment:
+      - DATABASE_USER=one-docs-eyup
+      - DATABASE_PASSWORD=RYczWW2WIVpwvZRQ
+      - CLUSTER_INFO=nest-blog.qe8gs.mongodb.net
+      - DATABASE_NAME=paribu_asset_management
+    networks:
+      - my_network
+
+  redis:
+    image: redis:latest
+    container_name: redis-service
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge

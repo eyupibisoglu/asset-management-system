@@ -1,0 +1,62 @@
+@baseUrl = http://localhost:3000
+###https://api.onedocs.ai
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{"email": "ibisoglueyup@gmail.com", "password": "123456"}
+
+###
+POST http://localhost:3000/wallets
+Authorization: Bearer {{login.response.body.accessToken}}
+Content-Type: application/json
+
+{"name": "Özkan's Wallet", "network": "Bitcoin Network", "address": "1OzkanBitcoinAddress"}
+
+###
+GET http://localhost:3000/wallets/67c279fe0de83bced830fb56
+Authorization: Bearer {{login.response.body.accessToken}}
+
+###
+DELETE http://localhost:3000/wallets/67c278560de83bced830fb49
+Authorization: Bearer {{login.response.body.accessToken}}
+
+###
+POST http://localhost:3000/assets
+Authorization: Bearer {{login.response.body.accessToken}}
+Content-Type: application/json
+
+{"name": "BTC", "amount": 50, "wallet": "67c3999810c277d72dd96fd9"}
+
+###
+GET http://localhost:3000/assets
+Authorization: Bearer {{login.response.body.accessToken}}
+
+### eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlkIjoyLCJpYXQiOjE3NDA5NTM4NjMsImV4cCI6MTc0MTU1ODY2M30.lZtIm_PPLYfyOzziuB3VOCnBz8oNfeiRgbFYs4Pk8jg
+GET http://localhost:3000/users
+Authorization: Bearer {{login.response.body.accessToken}}
+Content-Type: application/json
+
+{"email": "ibisoglueyup@gmail.com", "password": "123456"}
+
+###
+GET http://localhost:3000/users/2
+Authorization: Bearer {{login.response.body.accessToken}}
+Content-Type: application/json
+
+{"email": "ibisoglueyup@gmail.com", "password": "123456"}
+
+###
+POST http://localhost:3000/users
+Authorization: Bearer {{login.response.body.accessToken}}
+Content-Type: application/json
+
+{"email": "ozkanbor@gmail.com", "name": "Özkan Bor", "password": "123456"}
+
+###
+POST http://localhost:3000/assets-task
+Authorization: Bearer {{login.response.body.accessToken}}
+Content-Type: application/json
+
+{"from": "67c39735b3708c5b7c38e88c", "to": "67c399ecb3708c5b7c38e88e", "amount": 60, "scheduledUnixTime": 1740956345, "scheduledIsoTime": "2025-03-02T22:13:00.073-04:00" }
+
