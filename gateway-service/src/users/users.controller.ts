@@ -3,6 +3,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreatedUserDto } from './dto/created-user.dto';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('users')
 export class UsersController {
@@ -25,6 +26,7 @@ export class UsersController {
         return this.client.send({ cmd: 'users.findOne' }, data);
     }
 
+    @Public()
     @ApiOperation({ summary: 'Create a user' })
     @ApiBody({ type: CreateUserDto })
     @ApiResponse({ type: CreatedUserDto, status: 201 })
